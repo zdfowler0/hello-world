@@ -1,5 +1,7 @@
-import turtle as trtl
- 
+# This program plays the game Hungry Hungry Hippos, but with turtles!
+# The controls to move each turtle are: w, c, n, and p
+# TODO: Add quit function and end screen
+
 # Import libraries
 import turtle as trtl
 import random
@@ -78,7 +80,7 @@ balls = []
 #ball_colors = ["red", "blue", "lime", "yellow"]
 ball_colors = ["red","royalblue","yellow","lime"]
  
-# Creates the balls
+# Create balls
 for i in range(ball_count):
   ball = trtl.Turtle()
   ball.hideturtle()
@@ -89,7 +91,7 @@ for i in range(ball_count):
   ball.turtlesize(0.5)
   ball.speed(0)
  
-# Places balls in the corners
+# Place balls in the corners
 location = 0
 for ball in balls:
   if (0 <= location <= 1*((ball_count-1)/4)):
@@ -107,7 +109,7 @@ for ball in balls:
   ball.showturtle()
   location += 1
  
- 
+# Move each ball in a random direction
 ball_speed = 23
 def move_balls():
   for ball in balls:
@@ -116,7 +118,8 @@ def move_balls():
       ball.forward(ball_speed*1.2)
     else:
       ball.forward(ball_speed)
- 
+
+# Test to see if a turtle can eat a ball
 def eat_balls(turtle):
   for ball in balls:
     if (turtle.xcor() - 15 <= ball.xcor() <= turtle.xcor() + 15) and (turtle.xcor() - 15 <= ball.xcor() <= turtle.xcor() + 15):
@@ -137,10 +140,11 @@ def eat_balls(turtle):
         ball.setpos(0,-2*pos)
         balls.remove(ball)
  
-# Actually moves Hippos
+# Set speed for turtles
 for j in range(4):
   hippos[j].speed(5)
- 
+
+# Functions to move turtles and test if they can eat a ball 
 def red():
   hippos[0].forward(30)
   eat_balls(hippos[0])
@@ -167,13 +171,13 @@ def listening():
   wn.onkey(green, 'n')
   wn.onkey(yellow, 'c')
   wn.onkey(blue, 'p')
-  wn.onkey(red, "`")
+  wn.onkey(red, "w")
  
 i = 1
 # main game loop
 while (len(balls) != 0):
   move_balls()
-  # Does function listening() whenever i / 4 has no remainder
+  # Checks to see which keys are pressed every 4 ticks 
   if ((i%4) == 0):
     listening()
   i += 1
